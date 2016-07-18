@@ -1,0 +1,16 @@
+<div (window:scroll)="onScroll($event)">
+    <figure class="image" *ngFor="let image of images">
+        <div *ngIf="image.isFolder" (click)="onFolderClick(image.url, image.name)" class="ratio-4-3" [ngStyle]="{'background-image':'url(img/folder_small.png)'}">
+        </div>
+        <div *ngIf="!image.isFolder" (click)="onImageClick(image.rawUrl)" class="ratio-4-3" [ngStyle]="{'background-image':image.thumbUrl}"></div>
+        <figcaption *ngIf="image.isFolder" class="icontext">{{image.name}}</figcaption>
+    </figure>
+</div>
+<div *ngIf="loading" id="overlay"></div>
+<div *ngIf="selectedImageUrl != ''">
+    <div (click)="onImageClick('')" id="overlay"></div>
+    <div class="overlay-image">
+        <img (click)="onImageClick('')" class="fullimage" src="{{selectedImageUrl}}">
+         <!-- <a id="download-image" href="{{selectedImageUrl}}">download</a> -->
+    </div>
+</div>
